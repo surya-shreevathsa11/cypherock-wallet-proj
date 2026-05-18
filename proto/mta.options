@@ -1,0 +1,5 @@
+*OtRound1Msg.point_a max_size:33
+*OtRound2Msg.point_b max_size:33
+*OtRound3Msg.e0 max_size:32
+*OtRound3Msg.e1 max_size:32
+*ShareRevealMsg.share max_size:32

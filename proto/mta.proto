@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package cypherock;
+
+message SessionHello {
+  uint32 version = 1;
+}
+
+message OtRound1Msg {
+  uint32 bit_index = 1;
+  bytes point_a = 2;
+}
+
+message OtRound2Msg {
+  uint32 bit_index = 1;
+  bytes point_b = 2;
+}
+
+message OtRound3Msg {
+  uint32 bit_index = 1;
+  bytes e0 = 2;
+  bytes e1 = 3;
+}
+
+message ShareRevealMsg {
+  bytes share = 1;
+}
