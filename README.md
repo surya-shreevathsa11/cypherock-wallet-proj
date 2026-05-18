@@ -197,3 +197,9 @@ From the project root, after building:
 ```
 
 This starts the server in the background, runs the client, then stops the server.
+
+---
+
+## AI disclosure
+
+[Cursor](https://cursor.com) was used for assistance with this **README** (structure and wording) and for **testing** (build/run checks, demo validation). All cryptographic and protocol implementation code was written manually.
