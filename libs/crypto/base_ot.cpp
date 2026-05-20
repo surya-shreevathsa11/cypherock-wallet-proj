@@ -13,6 +13,15 @@ namespace cypherock::crypto {
 
 namespace {
 
+void sample_nonzero_scalar(bignum256* out) {
+  do {
+    uint8_t bytes[32];
+    random_buffer(bytes, sizeof(bytes));
+    bn_read_be(bytes, out);
+    bn_mod(out, &curve()->order);
+  } while (bn_is_zero(out));
+}
+
 // A.3.1: encryption key is the x-coordinate (abscissa) of the shared EC point.
 std::vector<uint8_t> ot_key_from_x(const bignum256& x) {
   std::vector<uint8_t> key(32);
@@ -46,10 +55,7 @@ BaseOtSenderOutput BaseOtSender::begin(const Scalar256& m0, const Scalar256& m1,
   m1_ = m1;
   bit_index_ = bit_index;
 
-  uint8_t a_bytes[32];
-  random_buffer(a_bytes, sizeof(a_bytes));
-  bn_read_be(a_bytes, &a_);
-  bn_mod(&a_, &curve()->order);
+  sample_nonzero_scalar(&a_);
 
   curve_point A;
   scalar_mult_base(a_, &A);
@@ -101,10 +107,7 @@ BaseOtReceiverOutput BaseOtReceiver::receive(const std::vector<uint8_t>& point_a
     throw std::runtime_error("invalid OT point A");
   }
 
-  uint8_t b_bytes[32];
-  random_buffer(b_bytes, sizeof(b_bytes));
-  bn_read_be(b_bytes, &b_);
-  bn_mod(&b_, &curve()->order);
+  sample_nonzero_scalar(&b_);
 
   curve_point B;
   scalar_mult_base(b_, &B);

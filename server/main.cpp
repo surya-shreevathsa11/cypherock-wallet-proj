@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdexcept>
 #include <string>
 
 #include <asio.hpp>
@@ -15,9 +16,13 @@ namespace {
 uint16_t parse_port(int argc, char** argv) {
   uint16_t port = 9000;
   for (int i = 1; i < argc; ++i) {
-    std::string arg = argv[i];
+    const std::string arg = argv[i];
     if (arg == "--port" && i + 1 < argc) {
-      port = static_cast<uint16_t>(std::stoi(argv[++i]));
+      const long value = std::stol(argv[++i]);
+      if (value < 1 || value > 65535) {
+        throw std::runtime_error("port must be between 1 and 65535");
+      }
+      port = static_cast<uint16_t>(value);
     }
   }
   return port;

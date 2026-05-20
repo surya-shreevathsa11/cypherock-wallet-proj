@@ -103,4 +103,12 @@ Scalar256 Scalar256::neg(const Scalar256& a) {
   return r;
 }
 
+bool Scalar256::equal(const Scalar256& a, const Scalar256& b) {
+  bignum256 lhs = a.bn_;
+  bignum256 rhs = b.bn_;
+  reduce(&lhs);
+  reduce(&rhs);
+  return bn_is_equal(&lhs, &rhs) != 0;
+}
+
 }  // namespace cypherock::crypto

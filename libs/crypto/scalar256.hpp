@@ -29,6 +29,7 @@ class Scalar256 {
   static Scalar256 sub(const Scalar256& a, const Scalar256& b);
   static Scalar256 mul(const Scalar256& a, const Scalar256& b);
   static Scalar256 neg(const Scalar256& a);
+  static bool equal(const Scalar256& a, const Scalar256& b);
 
   const bignum256& bn() const { return bn_; }
   bignum256& bn() { return bn_; }

@@ -6,7 +6,7 @@ bool verify_additive_shares(const Scalar256& x, const Scalar256& y, const Scalar
                             const Scalar256& V) {
   const Scalar256 product = Scalar256::mul(x, y);
   const Scalar256 sum = Scalar256::add(U, V);
-  return product.to_hex() == sum.to_hex();
+  return Scalar256::equal(product, sum);
 }
 
 }  // namespace cypherock::crypto
